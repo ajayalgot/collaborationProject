@@ -1,13 +1,18 @@
 package com.collaborate.model;
 
 import java.util.Date;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
 
 @Entity
-@Table
-public class Blog 
+@Table(name="Blog_details")
+@Component
+public class Blog {
 
-{
 	@Id
 	private int blogId;
 	private String blogName,blogContent,status,username;
@@ -55,4 +60,6 @@ public class Blog
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
+	
+	
 }
