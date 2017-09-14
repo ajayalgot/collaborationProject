@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.collaborate.model.BlogComment;
 
 
-@Repository("blogDAO")
+@Repository("blogcommentDAO")
 public class BlogCommentDAOImpl implements BlogCommentDAO {
 	
 	@Autowired
