@@ -13,6 +13,8 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.collaborate.model.Blog;
+import com.collaborate.model.Forum;
 import com.collaborate.dao.BlogDAO;
 import com.collaborate.dao.BlogDAOImpl;
 
@@ -37,11 +39,11 @@ public class HbConfig {
 	//2. create a hb properties which is used for localsessionfactor
 	public Properties getHibernateProperties()
 	{
-		
-		Properties properties=new Properties();
-		properties.setProperty("hibernate.hbm2ddl.auto","update");
-		
-		properties.put("hibernate.dialect","org.hibernate.dialect.Oracle10gDialect");
+		Properties properties = new Properties();
+		properties.put("hibernate.show_sql", "true");
+		properties.put("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
+		properties.put("hibernate.hbm2ddl.auto", "create");
+		System.out.println("Hibernate Properties");
 		return properties;
 	}
 	
@@ -52,6 +54,9 @@ public class HbConfig {
 		LocalSessionFactoryBuilder localSessionFactoryBuilder=new LocalSessionFactoryBuilder(getOracleDataSourceObject());
 		localSessionFactoryBuilder.addProperties(getHibernateProperties());
 		localSessionFactoryBuilder.scanPackages("com.collaborate");
+		localSessionFactoryBuilder.addAnnotatedClass(Blog.class);
+		localSessionFactoryBuilder.addAnnotatedClass(Forum.class);
+
 		System.out.println("SessionFactory Bean Created");
 		
 		return localSessionFactoryBuilder.buildSessionFactory();
